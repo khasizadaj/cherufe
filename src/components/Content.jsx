@@ -1,32 +1,48 @@
+import { useState } from "react";
 import { CirclePlus, CookingPot } from "lucide-react";
 
-export default function Content(props) {
+export default function Content() {
   function getRecipe() {
     console.log("Get Recipe Called!");
   }
 
   function addIngredient(e) {
     e.preventDefault();
-    console.log("Added ingredient.");
+
     const data = new FormData(e.currentTarget);
     const newIngredient = data.get("ingredient");
-    ingredients.push(newIngredient);
-    console.log(ingredients);
 
-    // NOTE: This is not interative solution. State is the way
-    // to go and will be added later.
+    if (newIngredient.length === 0) {
+      alert("No ingredient provided.");
+      return;
+    }
+    if (ingredients.includes(newIngredient)) {
+      alert("This ingredient is already added.");
+      return;
+    }
+    console.log("Added ingredient.");
+    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
 
-  const ingredients = ["Tomato", "Cheddar cheese", "Carrot"];
+  const [ingredients, setIngredients] = useState([]);
+
+  let ingredientsElement;
+  if (ingredients.length === 0) {
+    ingredientsElement = (
+      <p className="text-gray-500">ℹ️ Added ingredients will show up here!</p>
+    );
+  } else {
+    ingredientsElement = ingredients.map((ingredient, index) => {
+      return <li key={index}>{ingredient}</li>;
+    });
+  }
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8">
       <div className="flex-1 p-4 space-y-8">
         <h2 className="text-3xl font-semibold text-orange-500">Ingredients</h2>
         <ol className="list-decimal list-inside text-2xl space-y-2">
-          {ingredients.map((ingredient, index) => {
-            return <li key={index}>{ingredient}</li>;
-          })}
+          {ingredientsElement}
         </ol>
       </div>
       <div className="flex mb-2 gap-2">
