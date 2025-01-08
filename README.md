@@ -42,7 +42,7 @@ npm run dev
 
 ## Disclaimer
 
-Cherufe is a personal project built for fun and experimentation with AI-generated recipes. It is inspired by the **Cherufe**, a mythical lava creature, reflecting the fiery and creative essence of the app. This project is not affiliated with any course or organization.
+THis project is built along with [Learn React](https://scrimba.com/learn-react-c0e) course on Scrimba by [Bob Ziroll](https://scrimba.com/@bobziroll). It is not an official project of Scrimba, I am just learning React and building this project for fun. I made sure to add more features along the way.
 
 **Note:** All features are still under development and not functional yet—stay tuned!
 
