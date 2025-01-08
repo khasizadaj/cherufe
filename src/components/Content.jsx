@@ -10,10 +10,16 @@ export default function Content(props) {
     console.log("Added ingredient.");
   }
 
+  const ingredients = ["Tomato", "Cheddar cheese", "Carrot"];
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8">
-      <div className="flex-1">
-        {/*  <!-- Empty space for ingredients and other content --> */}
+      <div className="flex-1 p-4 space-y-8">
+        <h2 className="text-3xl font-semibold text-orange-500">Ingredients</h2>
+        <ol className="list-decimal list-inside text-2xl space-y-2">
+          {ingredients.map((ingredient, index) => {
+            return <li key={index}>{ingredient}</li>;
+          })}
+        </ol>
       </div>
       <div className="flex mb-2 gap-2">
         <form className="h-full flex flex-1 mb-2 gap-2">
