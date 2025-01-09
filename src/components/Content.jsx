@@ -9,19 +9,23 @@ export default function Content() {
   function addIngredient(e) {
     e.preventDefault();
 
-    const data = new FormData(e.currentTarget);
-    const newIngredient = data.get("ingredient");
+    const formEl = e.currentTarget;
+    const data = Object.fromEntries(new FormData(formEl));
 
-    if (newIngredient.length === 0) {
+    // Validate input
+    if (data.ingredient.length === 0) {
       alert("No ingredient provided.");
       return;
     }
-    if (ingredients.includes(newIngredient)) {
+    if (ingredients.includes(data.ingredient)) {
       alert("This ingredient is already added.");
       return;
     }
-    console.log("Added ingredient.");
-    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+
+    // Update ingredients
+    setIngredients((prevIngredients) => [...prevIngredients, data.ingredient]);
+
+    formEl.reset();
   }
 
   const [ingredients, setIngredients] = useState([]);
