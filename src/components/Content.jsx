@@ -6,6 +6,11 @@ export default function Content() {
     console.log("Get Recipe Called!");
   }
 
+  /*
+    This section is much more simplified in react@19.0.0
+    In new version you do not need to prevent form submission
+    manually and reset it.
+  */
   function addIngredient(e) {
     e.preventDefault();
 
