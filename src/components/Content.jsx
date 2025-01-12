@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CirclePlus, CookingPot } from "lucide-react";
+import Ingredients from "./Ingredients";
 
 export default function Content() {
   function getRecipe() {
@@ -37,7 +38,7 @@ export default function Content() {
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8">
-      <Ingredients ingredients={ingredients}/>
+      <Ingredients ingredients={ingredients} />
       <div className="flex mb-2 gap-2">
         <form
           onSubmit={addIngredient}
@@ -59,9 +60,10 @@ export default function Content() {
           </button>
         </form>
         <button
+          disabled
           type="button"
           onClick={getRecipe}
-          className="flex justify-center items-center gap-4 p-4 text-xl font-semibold border rounded border-orange-500 bg-orange-500 hover:bg-orange-600"
+          className="flex justify-center items-center gap-4 p-4 text-xl font-semibold border rounded border-orange-500 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-700 disabled:border-gray-300 disabled:cursor-not-allowed"
         >
           <CookingPot size={24} className="text-white" />
           Cook Up!
