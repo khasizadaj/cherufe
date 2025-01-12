@@ -36,7 +36,7 @@ export default function Content() {
   }
 
   const [ingredients, setIngredients] = useState([]);
-  const [isRecipeReady, setIsRecipeReady] = useState(true);
+  const [isRecipeReady, setIsRecipeReady] = useState(false);
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8 gap-4">
