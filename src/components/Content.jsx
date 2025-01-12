@@ -35,25 +35,9 @@ export default function Content() {
 
   const [ingredients, setIngredients] = useState([]);
 
-  let ingredientsElement;
-  if (ingredients.length === 0) {
-    ingredientsElement = (
-      <p className="text-gray-500">ℹ️ Added ingredients will show up here!</p>
-    );
-  } else {
-    ingredientsElement = ingredients.map((ingredient, index) => {
-      return <li key={index}>{ingredient}</li>;
-    });
-  }
-
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8">
-      <div className="flex-1 p-4 space-y-8">
-        <h2 className="text-3xl font-semibold text-orange-500">Ingredients</h2>
-        <ol className="list-decimal list-inside text-2xl space-y-2">
-          {ingredientsElement}
-        </ol>
-      </div>
+      <Ingredients ingredients={ingredients}/>
       <div className="flex mb-2 gap-2">
         <form
           onSubmit={addIngredient}
