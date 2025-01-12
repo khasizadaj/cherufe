@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: theme("width.3");
+}
+
+::-webkit-scrollbar-track {
+  background: theme("colors.gray.500");
+  border-radius: theme("borderRadius.lg");
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme("colors.gray.800");
+  border-radius: theme("borderRadius.lg");
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.gray.950");
+}

@@ -37,8 +37,10 @@ export default function Content() {
   const [ingredients, setIngredients] = useState([]);
 
   return (
-    <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8">
+    <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8 gap-4">
+      <div className="flex-1 space-y-8 overflow-y-auto">
       <Ingredients ingredients={ingredients} />
+      </div>
       <div className="flex mb-2 gap-2">
         <form
           onSubmit={addIngredient}
