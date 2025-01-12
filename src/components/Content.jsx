@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CirclePlus, CookingPot } from "lucide-react";
 import Ingredients from "./Ingredients";
+import Recipe from "./Recipe";
 
 export default function Content() {
   function getRecipe() {
@@ -35,11 +36,13 @@ export default function Content() {
   }
 
   const [ingredients, setIngredients] = useState([]);
+  const [isRecipeReady, setIsRecipeReady] = useState(true);
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8 gap-4">
       <div className="flex-1 space-y-8 overflow-y-auto">
-      <Ingredients ingredients={ingredients} />
+        <Ingredients ingredients={ingredients} />
+        {isRecipeReady && <Recipe />}
       </div>
       <div className="flex mb-2 gap-2">
         <form
