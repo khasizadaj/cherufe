@@ -2,7 +2,7 @@
 
 Cherufe is a fun and experimental AI-powered recipe generator. It uses the **ChatGPT API** to create unique and creative recipes, making it easy to discover new meal ideas—eventually. None of the features are ready yet, but development is in progress!
 
-## Features (Planned)
+## Features
 
 - Generates recipes based on AI suggestions.
 - Customizable inputs to guide recipe creation.

@@ -32,7 +32,7 @@ Markdown format:
 - Use H2 for the recipe name, H3 for sections (e.g. "Ingredients")
 `;
 
-export async function getRecipeFromAI(ingredientsList, model) {
+export async function getRecipeFromAI(ingredientsList, cuisine, model) {
   const ingredientsString = ingredientsList.join(", ");
 
   if (model == "openai") {
@@ -53,7 +53,11 @@ export async function getRecipeFromAI(ingredientsList, model) {
           content: [
             {
               type: "text",
-              text: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`,
+              text: `
+                I have ${ingredientsString}. 
+                I would prefer it to be from ${cuisine} cuisine. 
+                Please give me a recipe you'd recommend I make!
+              `,
             },
           ],
         },
