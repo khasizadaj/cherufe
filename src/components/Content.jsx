@@ -5,12 +5,36 @@ import Recipe from "./Recipe";
 
 import { getRecipeFromAI } from "../utils/ai";
 
+const CUISINES = [
+  { value: "any", text: "Any" },
+  { value: "surprise", text: "Surprise me" },
+  { value: "italian", text: "Italian" },
+  { value: "chinese", text: "Chinese" },
+  { value: "mexican", text: "Mexican" },
+  { value: "indian", text: "Indian" },
+  { value: "japanese", text: "Japanese" },
+  { value: "french", text: "French" },
+  { value: "thai", text: "Thai" },
+  { value: "mediterranean", text: "Mediterranean" },
+  { value: "american", text: "American" },
+  { value: "korean", text: "Korean" },
+];
+
 export default function Content() {
   async function getRecipe() {
+    if (cuisine === "") {
+      if (confirm("Setting cuisine to Any")) {
+        setCuisine("any");
+      }
+      else {
+        alert("No cuisine selected. Please select a cuisine.");
+        return;
+      }
+    }
     try {
       console.log("Get Recipe Called!");
       setRequestSent(true);
-      const recipe = await getRecipeFromAI(ingredients, "openai");
+      const recipe = await getRecipeFromAI(ingredients, cuisine, "openai");
       setRequestSent(false);
       setRecipe(recipe);
     } catch (error) {
@@ -45,9 +69,14 @@ export default function Content() {
     formEl.reset();
   }
 
+  function updateCuisine(e) {
+    setCuisine(e.target.value);
+  }
+
   const [ingredients, setIngredients] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
   const [recipe, setRecipe] = useState("");
+  const [cuisine, setCuisine] = useState("");
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8 gap-4">
@@ -76,6 +105,26 @@ export default function Content() {
             Add ingredient
           </button>
         </form>
+        <select
+          name="cuisine"
+          aria-label="Select cuisine"
+          className="w-full sm:w-40 p-3 text-base font-semibold rounded border border-orange-500 bg-orange-500/10"
+          defaultValue=""
+          onChange={updateCuisine}
+        >
+          <option value="" disabled>
+            -- Cuisine --
+          </option>
+          {CUISINES.map((cuisine) => (
+            <option
+              key={cuisine.value}
+              value={cuisine.value}
+              className="bg-orange-800 text-gray-50"
+            >
+              {cuisine.text}
+            </option>
+          ))}
+        </select>
         <button
           type="button"
           onClick={getRecipe}
