@@ -10,7 +10,7 @@ export default function Ingredients(props) {
     });
   }
   return (
-    <div className="flex-1 p-4 space-y-8">
+    <div className="space-y-8">
       <h2 className="text-3xl font-semibold text-orange-500">Ingredients</h2>
       <ol className="list-decimal list-inside text-2xl space-y-2">
         {ingredientsElement}
