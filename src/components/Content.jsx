@@ -3,9 +3,19 @@ import { CirclePlus, CookingPot } from "lucide-react";
 import Ingredients from "./Ingredients";
 import Recipe from "./Recipe";
 
+import { getRecipeFromAI } from "../utils/ai";
+
 export default function Content() {
-  function getRecipe() {
-    console.log("Get Recipe Called!");
+  async function getRecipe() {
+    try {
+      console.log("Get Recipe Called!");
+      setRequestSent(true);
+      const recipe = await getRecipeFromAI(ingredients, "openai");
+      setRequestSent(false);
+      setRecipe(recipe);
+    } catch (error) {
+      console.error("Error fetching recipe:", error.message);
+    }
   }
 
   /*
@@ -36,13 +46,15 @@ export default function Content() {
   }
 
   const [ingredients, setIngredients] = useState([]);
-  const [isRecipeReady, setIsRecipeReady] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
+  const [recipe, setRecipe] = useState("");
 
   return (
     <section className="h-[calc(100vh-100px)] flex flex-col justify-end px-24 py-8 gap-4">
       <div className="flex-1 space-y-8 overflow-y-auto">
         <Ingredients ingredients={ingredients} />
-        {isRecipeReady && <Recipe />}
+        {requestSent && <Recipe recipe="Looking for a recipe... 🍜" />}
+        {!requestSent && recipe && <Recipe recipe={recipe} />}
       </div>
       <div className="flex mb-2 gap-2">
         <form
@@ -65,7 +77,6 @@ export default function Content() {
           </button>
         </form>
         <button
-          disabled
           type="button"
           onClick={getRecipe}
           className="flex justify-center items-center gap-4 p-4 text-xl font-semibold border rounded border-orange-500 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-700 disabled:border-gray-300 disabled:cursor-not-allowed"
